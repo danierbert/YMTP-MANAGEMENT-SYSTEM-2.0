@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YMTP - Participation & Activities</title>
+  <style>
+    :root {
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --dark-bg: #2c3e50;
+      --light-bg: #f4f4f4;
+      --text-dark: #333;
+      --text-light: #f4f4f4;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: var(--text-light);
+    }
+
+    /* HEADER / NAV */
+    header {
+      background: var(--red);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-title img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a, nav button {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav button:hover {
+      color: var(--yellow);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--red);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+        border-radius: 0 0 0 10px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* MAIN */
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--red);
+      margin-top: 20px;
+    }
+
+    /* Participation Tracker */
+    .tracker {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode .tracker {
+      background: #34495e;
+      color: var(--text-light);
+    }
+
+    .progress-bar {
+      width: 100%;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress {
+      height: 20px;
+      background: var(--red);
+      width: 60%; /* Example value */
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      transition: width 0.5s;
+    }
+
+    /* Activity Cards */
+    .activities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-5px);
+    }
+
+    body.dark-mode .activity-card {
+      background: #34495e;
+      color: var(--text-light);
+    }
+
+    .activity-card h3 {
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .joined {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .not-joined {
+      background: #e67e22;
+      color: white;
+    }
+
+    /* BUTTON DESIGN */
+    .btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #c0392b;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    body.dark-mode .btn {
+      background: var(--yellow);
+      color: var(--dark-bg);
+    }
+
+    body.dark-mode .btn:hover {
+      background: #d4ac0d;
+    }
+
+    footer {
+      background: var(--red);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="ymtp_logo.jpg" alt="YMTP Logo">
+      <h1>YMTP</h1>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="rules.html">Rules</a>
+      <a href="officers.html">Officers & Members</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="participation.html">Participation</a>
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📅 Participation & Activities</h2>
+
+    <!-- Participation Tracker -->
+    <div class="tracker">
+      <h3>Participation Progress</h3>
+      <p>You have attended <b>6</b> out of <b>10</b> activities.</p>
+      <div class="progress-bar">
+        <div class="progress">60%</div>
+      </div>
+    </div>
+
+    <!-- Activities List -->
+    <div class="activities">
+      <div class="activity-card">
+        <h3>Community Clean-Up Drive</h3>
+        <p><b>Date:</b> Jan 20, 2024</p>
+        <p><b>Description:</b> Organized a barangay-wide clean-up drive.</p>
+        <span class="status joined">✔ Joined</span>
+      </div>
+
+      <div class="activity-card">
+        <h3>Youth Leadership Training</h3>
+        <p><b>Date:</b> Mar 15, 2024</p>
+        <p><b>Description:</b> Leadership skills training for active members.</p>
+        <span class="status joined">✔ Joined</span>
+      </div>
+
+      <div class="activity-card">
+        <h3>Charity Fundraising</h3>
+        <p><b>Date:</b> Jun 10, 2024</p>
+        <p><b>Description:</b> Fundraising concert for students in need.</p>
+        <span class="status not-joined">✘ Not Joined</span>
+      </div>
+
+      <div class="activity-card">
+        <h3>Sports Tournament</h3>
+        <p><b>Date:</b> Aug 5, 2024</p>
+        <p><b>Description:</b> Inter-barangay sports competition.</p>
+        <span class="status joined">✔ Joined</span>
+      </div>
+
+      <div class="activity-card">
+        <h3>Tree Planting</h3>
+        <p><b>Date:</b> Nov 12, 2024</p>
+        <p><b>Description:</b> Planted 500 trees in partnership with NGOs.</p>
+        <span class="status not-joined">✘ Not Joined</span>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <button onclick="window.location.href='memmain.html'" class="btn">⬅ Back to Home</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 YMTP Management System. All rights reserved.
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById("darkModeToggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+
+    // Hamburger Menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

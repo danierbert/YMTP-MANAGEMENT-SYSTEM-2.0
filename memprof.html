@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YMTP - Profile</title>
+  <style>
+    :root {
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --dark-bg: #2c3e50;
+      --light-bg: #f4f4f4;
+      --text-dark: #333;
+      --text-light: #f4f4f4;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: var(--text-light);
+    }
+
+    /* HEADER / NAV */
+    header {
+      background: var(--red);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-title img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a, nav button {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav button:hover {
+      color: var(--yellow);
+    }
+
+    /* HAMBURGER MENU */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--red);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+        border-radius: 0 0 0 10px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* MAIN */
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .card {
+      background: #34495e;
+      color: var(--text-light);
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .status.active {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .status.inactive {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .profile-pic {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--red);
+    }
+
+    .profile-pic input {
+      margin-top: 10px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .details-grid div {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    body.dark-mode .details-grid div {
+      border-color: #555;
+    }
+
+    .upload-box {
+      border: 2px dashed var(--red);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      background: #fff5f5;
+    }
+
+    .violations ul, .participation ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .violations li {
+      padding: 8px;
+      background: #ffe0e0;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+    .participation li {
+      padding: 8px;
+      background: #f1f1f1;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+    body.dark-mode .participation li {
+      background: #3c4a5a;
+    }
+
+    .btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #c0392b;
+    }
+
+    footer {
+      background: var(--red);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    @media(max-width: 600px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="ymtp_logo.jpg" alt="YMTP Logo">
+      <h1>YMTP</h1>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="#">Members</a>
+      <a href="#">Activities</a>
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Membership Status -->
+    <div class="card">
+      <h2>👤 Membership Status</h2>
+      <span class="status active">Active Member</span>
+    </div>
+
+    <!-- Full Details with Profile Picture -->
+    <div class="card">
+      <h2>📋 Full Details</h2>
+      <div class="profile-pic">
+        <img id="profileImg" src="https://via.placeholder.com/120" alt="Profile Picture">
+        <br>
+        <input type="file" id="uploadPic" accept="image/*">
+      </div>
+      <div class="details-grid">
+        <div>Full Name:</div><div contenteditable="false">Juan Dela Cruz</div>
+        <div>Email:</div><div contenteditable="false">juan@example.com</div>
+        <div>Course:</div><div contenteditable="false">BSIT</div>
+        <div>Year & Section:</div><div contenteditable="false">3rd Year - A</div>
+        <div>Contact:</div><div contenteditable="false">09123456789</div>
+      </div>
+      <button id="editBtn" class="btn">Edit</button>
+      <button id="saveBtn" class="btn" style="display:none;">Save</button>
+    </div>
+
+    <!-- Requirements Upload -->
+    <div class="card">
+      <h2>📂 Requirements Upload</h2>
+      <div class="upload-box">
+        <p>Drag & Drop files here or <br><input type="file" multiple></p>
+      </div>
+    </div>
+
+    <!-- Warning/Violation -->
+    <div class="card violations">
+      <h2>⚠️ Warning / Violation</h2>
+      <ul>
+        <li>Late submission of documents - Jan 15, 2025</li>
+        <li>Missed mandatory activity - Feb 10, 2025</li>
+      </ul>
+    </div>
+
+    <!-- Participation -->
+    <div class="card participation">
+      <h2>✅ Participation</h2>
+      <ul>
+        <li>Community Clean-up - Dec 2024</li>
+        <li>Fundraising Event - Jan 2025</li>
+        <li>Leadership Seminar - Feb 2025</li>
+      </ul>
+    </div>
+
+    <!-- Back Button -->
+    <button onclick="window.location.href='memmain.html'" class="btn">⬅ Back to Home</button>
+  </main>
+
+  <footer>
+    © 2025 YMTP Management System. All rights reserved.
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById("darkModeToggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+
+    // Edit / Save Toggle
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const fields = document.querySelectorAll(".details-grid div:nth-child(even)");
+
+    editBtn.addEventListener("click", () => {
+      fields.forEach(field => field.setAttribute("contenteditable", "true"));
+      editBtn.style.display = "none";
+      saveBtn.style.display = "inline-block";
+    });
+
+    saveBtn.addEventListener("click", () => {
+      fields.forEach(field => field.setAttribute("contenteditable", "false"));
+      saveBtn.style.display = "none";
+      editBtn.style.display = "inline-block";
+      alert("Details saved!");
+    });
+
+    // Profile Picture Upload
+    const uploadPic = document.getElementById("uploadPic");
+    const profileImg = document.getElementById("profileImg");
+
+    uploadPic.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          profileImg.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Hamburger Menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

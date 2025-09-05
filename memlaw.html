@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YMTP - Rules and Regulations</title>
+  <style>
+    :root {
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --dark-bg: #2c3e50;
+      --light-bg: #f4f4f4;
+      --text-dark: #333;
+      --text-light: #f4f4f4;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: var(--text-light);
+    }
+
+    /* HEADER / NAV */
+    header {
+      background: var(--red);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-title img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a, nav button {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav button:hover {
+      color: var(--yellow);
+    }
+
+    /* HAMBURGER MENU */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--red);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+        border-radius: 0 0 0 10px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* MAIN */
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .card {
+      background: #34495e;
+      color: var(--text-light);
+    }
+
+    .rules-list {
+      list-style: decimal inside;
+      padding-left: 15px;
+    }
+
+    .rules-list li {
+      margin-bottom: 12px;
+      padding: 10px;
+      border-left: 4px solid var(--red);
+      background: #fafafa;
+      border-radius: 5px;
+    }
+
+    body.dark-mode .rules-list li {
+      background: #3c4a5a;
+      border-color: var(--yellow);
+    }
+
+    .btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #c0392b;
+    }
+
+    footer {
+      background: var(--red);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="ymtp_logo.jpg" alt="YMTP Logo">
+      <h1>YMTP</h1>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="rules.html">Rules</a>
+      <a href="#">Members</a>
+      <a href="#">Activities</a>
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>📜 Rules and Regulations</h2>
+      <p>As part of the Youth Movement Through Progress (YMTP), all members are expected to follow these rules and regulations:</p>
+      <ol class="rules-list">
+        <li>Respect all fellow members, officers, and staff at all times.</li>
+        <li>Attend all general assemblies, activities, and events unless with valid excuse.</li>
+        <li>Submit all requirements on or before the given deadline.</li>
+        <li>Promote discipline, honesty, and integrity in all undertakings.</li>
+        <li>Properly use and care for the organization’s resources and facilities.</li>
+        <li>Observe punctuality in every activity and meeting.</li>
+        <li>Avoid any form of misconduct, violation, or abuse of authority.</li>
+        <li>Follow the chain of command and organizational hierarchy.</li>
+        <li>Support the organization’s mission, vision, and objectives.</li>
+        <li>Non-compliance with the above rules may result in disciplinary action.</li>
+      </ol>
+    </div>
+
+    <button onclick="window.location.href='memmain.html'" class="btn">⬅ Back to Home</button>
+  </main>
+
+  <footer>
+    © 2025 YMTP Management System. All rights reserved.
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById("darkModeToggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+
+    // Hamburger Menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>

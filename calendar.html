@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participation & Activities - YMTP</title>
+  <style>
+    :root {
+      --red: #e74c3c;
+      --yellow: #f1c40f;
+      --dark-bg: #1e1e1e;
+      --light-bg: #f9f9f9;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light-bg);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar */
+    nav {
+      background: var(--red);
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    nav h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    /* Calendar */
+    .calendar {
+      flex: 2;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .calendar h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    .calendar th, .calendar td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .calendar th {
+      background: var(--red);
+      color: white;
+    }
+
+    .calendar td.event {
+      background: var(--yellow);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Upcoming Events */
+    .events {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .events h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .event-item {
+      background: var(--light-bg);
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border-left: 5px solid var(--red);
+    }
+
+    .btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: 0.3s;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+    }
+
+    .modal-actions {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .close-btn {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .close-btn:hover {
+      background: #333;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>YMTP</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="rules.html">Rules</a></li>
+      <li><a href="officers.html">Officers</a></li>
+      <li><a href="achievements.html">Achievements</a></li>
+      <li><a href="participation.html">Participation</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Calendar -->
+    <div class="calendar">
+      <h2>September 2025</h2>
+      <table>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+        <tr>
+          <td></td><td>1</td><td>2</td><td>3</td>
+          <td class="event" data-title="General Assembly" data-desc="All members are required to attend the monthly General Assembly.">4</td>
+          <td>5</td><td>6</td>
+        </tr>
+        <tr>
+          <td>7</td><td>8</td>
+          <td class="event" data-title="Tree Planting Activity" data-desc="Join us for the community tree planting event.">9</td>
+          <td>10</td><td>11</td><td>12</td><td>13</td>
+        </tr>
+        <tr>
+          <td>14</td><td>15</td><td>16</td><td>17</td>
+          <td class="event" data-title="Community Outreach Program" data-desc="Volunteer work and outreach activity for the community.">18</td>
+          <td>19</td><td>20</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Events -->
+    <div class="events">
+      <h2>Upcoming Events</h2>
+      <div class="event-item"><strong>Sept 4:</strong> General Assembly</div>
+      <div class="event-item"><strong>Sept 9:</strong> Tree Planting Activity</div>
+      <div class="event-item"><strong>Sept 18:</strong> Community Outreach Program</div>
+      <button class="btn" onclick="window.location.href='memmain.html'">⬅ Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+
+      <div class="modal-actions">
+        <button class="btn" id="attendBtn">✅ Mark as Attending</button>
+
+        <textarea id="excuseText" placeholder="Enter your excuse letter here..."></textarea>
+        <button class="btn" id="excuseBtn">📄 Submit Excuse Letter</button>
+      </div>
+
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const events = document.querySelectorAll(".calendar td.event");
+    const modal = document.getElementById("eventModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const attendBtn = document.getElementById("attendBtn");
+    const excuseBtn = document.getElementById("excuseBtn");
+    const excuseText = document.getElementById("excuseText");
+
+    let currentEvent = "";
+
+    events.forEach(event => {
+      event.addEventListener("click", () => {
+        modalTitle.textContent = event.dataset.title;
+        modalDesc.textContent = event.dataset.desc;
+        currentEvent = event.dataset.title;
+        excuseText.value = "";
+        modal.style.display = "flex";
+      });
+    });
+
+    attendBtn.addEventListener("click", () => {
+      alert("You have marked attendance for: " + currentEvent);
+      console.log("Attending:", currentEvent);
+      closeModal();
+    });
+
+    excuseBtn.addEventListener("click", () => {
+      if (excuseText.value.trim() === "") {
+        alert("Please enter your excuse letter.");
+        return;
+      }
+      alert("Excuse submitted for: " + currentEvent + "\nReason: " + excuseText.value);
+      console.log("Excuse for", currentEvent, ":", excuseText.value);
+      closeModal();
+    });
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>

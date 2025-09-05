@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YMTP Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #fdfdfd;
+    }
+
+    .login-container {
+      display: flex;
+      width: 900px;
+      max-width: 95%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    /* Left Panel */
+    .welcome-panel {
+      flex: 1;
+      background: linear-gradient(135deg, #e74c3c, #f1c40f);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .welcome-panel img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      border: 3px solid white;
+      background: white;
+    }
+
+    .welcome-panel h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .welcome-panel p {
+      font-size: 14px;
+      max-width: 300px;
+      line-height: 1.6;
+    }
+
+    /* Right Panel */
+    .login-panel {
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-panel h2 {
+      margin-bottom: 20px;
+      color: #e74c3c;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .login-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: block;
+      margin: 15px auto 10px auto; /* center horizontally */
+    }
+
+    .login-btn:hover {
+      background: #c0392b;
+    }
+
+    .forgot-pass {
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    
+
+    .forgot-pass a {
+      text-decoration: none;
+      color: #f39c12;
+      font-size: 14px;
+    }
+
+    .forgot-pass a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+      }
+      .welcome-panel, .login-panel {
+        flex: none;
+        width: 100%;
+      }
+      .welcome-panel {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Left Panel -->
+    <div class="welcome-panel">
+      <img src="ymtp_logo.jpg" alt="YMTP Logo">
+      <h2>Welcome to Youth Movement Through Progress (YMTP) Management System</h2>
+      <p>"Empowering the youth through progress, unity, and service. Together, we build a stronger community."</p>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="login-panel">
+      <h2>Login</h2>
+      <form onsubmit="return loginUser(event)">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit" onclick="window.location.href='memmain.html'" class="login-btn">Login</button>
+        <div class="forgot-pass">
+          <a href="#">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+
+      if (username === "admin" && password === "1234") {
+        alert("Login successful!");
+        window.location.href = "dashboard.html"; // redirect
+      } else {
+        alert("Invalid username or password.");
+      }
+    }
+  </script>
+</body>
+</html>
