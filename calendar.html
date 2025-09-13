@@ -17,6 +17,7 @@
       background: var(--light-bg);
       margin: 0;
       padding: 0;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* Navbar */
@@ -27,30 +28,63 @@
       justify-content: space-between;
       align-items: center;
       color: white;
+      position: relative;
     }
 
-    nav h1 {
-      font-size: 20px;
-      margin: 0;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
     }
 
-    nav ul {
-      list-style: none;
+    .logo img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
       display: flex;
       gap: 15px;
-      margin: 0;
-      padding: 0;
+      align-items: center;
     }
 
-    nav ul li a {
+    .nav-links a,
+    .nav-links button {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
     }
 
-    nav ul li a:hover {
+    .nav-links a:hover,
+    .nav-links button:hover {
       text-decoration: underline;
+    }
+
+    /* Hamburger as container */
+    .hamburger {
+      display: none;
+      font-size: 22px;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 12px;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      background: transparent;
+    }
+
+    .hamburger:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
     }
 
     /* Layout */
@@ -68,6 +102,7 @@
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      overflow-x: auto;
     }
 
     .calendar h2 {
@@ -79,6 +114,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: center;
+      min-width: 400px;
     }
 
     .calendar th, .calendar td {
@@ -206,6 +242,44 @@
       .container {
         flex-direction: column;
       }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--red);
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .calendar {
+        padding: 10px;
+      }
+      .calendar table {
+        font-size: 12px;
+        min-width: 300px;
+      }
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: var(--dark-bg);
+      color: white;
+    }
+    body.dark .calendar,
+    body.dark .events,
+    body.dark .modal-content {
+      background: #333;
+      color: white;
+    }
+    body.dark nav {
+      background: #111;
     }
   </style>
 </head>
@@ -213,15 +287,21 @@
 
   <!-- Navbar -->
   <nav>
-    <h1>YMTP</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="rules.html">Rules</a></li>
-      <li><a href="officers.html">Officers</a></li>
-      <li><a href="achievements.html">Achievements</a></li>
-      <li><a href="participation.html">Participation</a></li>
-    </ul>
+    <div class="logo">
+      <img src="ymtp_logo.jpg" alt="YMTP Logo">
+      <span>YMTP Calendar Page</span>
+    </div>
+    <div class="hamburger" id="hamburger">
+      ☰
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="memmain.html">Home</a>
+      <a href="memprof.html">Profile</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+      <a href="login.html">Logout</a>
+    </div>
   </nav>
 
   <!-- Main Content -->
@@ -285,6 +365,23 @@
   </div>
 
   <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      darkModeToggle.textContent = 
+        document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+
+    // Calendar events modal
     const events = document.querySelectorAll(".calendar td.event");
     const modal = document.getElementById("eventModal");
     const modalTitle = document.getElementById("modalTitle");
@@ -307,7 +404,6 @@
 
     attendBtn.addEventListener("click", () => {
       alert("You have marked attendance for: " + currentEvent);
-      console.log("Attending:", currentEvent);
       closeModal();
     });
 
@@ -317,7 +413,6 @@
         return;
       }
       alert("Excuse submitted for: " + currentEvent + "\nReason: " + excuseText.value);
-      console.log("Excuse for", currentEvent, ":", excuseText.value);
       closeModal();
     });
 
